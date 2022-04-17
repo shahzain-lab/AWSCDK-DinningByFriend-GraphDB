@@ -1,0 +1,72 @@
+
+
+type Replies {
+    replies_Id: ID!
+    text: String!
+}
+
+type Reviews {
+    reviews_Id: ID!
+    review: String!
+    replies: Replies[]
+    like_Count: Int
+    dislike_Count: Int
+}
+
+type Restaurant {
+    restaurant_Id: String!
+    restaurant_Name: String!
+    reviews: Reviews[]
+}
+
+type Friend {
+    id: ID!
+    friend_Name: String!
+    # mutual_Friends: MutualFriend[]
+    # friend_of_friend: FriendOfFriend[]
+}
+
+type User {
+    user_Id: ID!
+    user_Name: String!
+    user_email: String!
+    restaurants: Restaurant[]
+    friends: Friend[]
+}
+
+type Recommendation {
+    users: User[]
+    restaurants: Restaurant[]
+}
+
+input NewFriendInput { 
+    id: ID!
+    friend_Name: String!
+}
+
+input NewUserInput {
+    user_Id: ID!
+    user_Name: String!
+    user_email: String!
+}
+
+input NewRestaurantInput {
+    restaurant_Id: String!
+    restaurant_Name: String!
+}
+
+type Query {
+    recommendations: Recommendation
+    users: User[]
+    restaurants: Restaurant[]
+    freinds: Friend[]
+    friend(id: ID!): Friend
+    restaurant(id: ID!): Restaurant
+}
+
+type Mutation {
+    add_User(new_user: NewUserInput): User[]
+    add_Friend(new_friend: NewFriendInput): Friend[]
+    add_Restaurant(new_restaurant: NewRestaurantInput): Restaurant[]
+}
+
