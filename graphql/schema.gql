@@ -116,3 +116,8 @@ type Mutation {
     create_recipe(recipe: RecipeInput!): [TRecipe]! ## make a new recipe in your specific restaurant
 }
 
+
+schema {
+    query: Query
+    mutation: Mutation
+}
