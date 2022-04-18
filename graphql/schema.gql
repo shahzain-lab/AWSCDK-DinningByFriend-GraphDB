@@ -1,42 +1,64 @@
 
-
-type Replies {
-    replies_Id: ID!
-    text: String!
+enum Thumb {
+    UP
+    DOWN
 }
 
-type Reviews {
+type Reply {
+    replies_Id: ID!
+    text: String!
+    thumb: Thumb!
+}
+
+type Review {
     reviews_Id: ID!
     review: String!
-    replies: Replies[]
-    like_Count: Int
-    dislike_Count: Int
+    replies: [Reply]
+    like_Count: Float!
+    dislike_Count: Float!
+}
+
+type RecipeDetail {
+    description: String
+    ingrediants: String!
+    tags: String!
+}
+
+type Recipe { 
+    recipe_ID: String!
+    recipe_Name: String!
+    recipe_details: RecipeDetail
+    reviews: [Review]!
 }
 
 type Restaurant {
     restaurant_Id: String!
     restaurant_Name: String!
-    reviews: Reviews[]
+    recipes: [Recipe]!
+}
+
+type FriendOfFriend {
+    friend_id: ID!,
+    friend_Name: String!
 }
 
 type Friend {
     id: ID!
     friend_Name: String!
-    # mutual_Friends: MutualFriend[]
-    # friend_of_friend: FriendOfFriend[]
+    friends: [FriendOfFriend]!
 }
 
 type User {
     user_Id: ID!
     user_Name: String!
     user_email: String!
-    restaurants: Restaurant[]
-    friends: Friend[]
+    restaurants: [Restaurant]!
+    friends: [Friend]!
 }
 
 type Recommendation {
-    users: User[]
-    restaurants: Restaurant[]
+    friends: [Friend]!
+    restaurants: [Restaurant]!
 }
 
 input NewFriendInput { 
@@ -55,18 +77,43 @@ input NewRestaurantInput {
     restaurant_Name: String!
 }
 
+input ReplyInput {
+    replies_Id: ID!
+    text: String
+    thumb: Thumb
+}
+
+input ReviewInput {
+    reviews_Id: ID!
+    review: String!
+}
+
+input RecipeInput {
+    recipe_ID: String!
+    recipe_Name: String!
+    recipe_details: RecipeDetail
+}
+
 type Query {
-    recommendations: Recommendation
-    users: User[]
-    restaurants: Restaurant[]
-    freinds: Friend[]
-    friend(id: ID!): Friend
-    restaurant(id: ID!): Restaurant
+    recommendations: Recommendation ## get recommended friends and their retaurants after signup
+    get_user: User ## get user info
+    get_friend(id: ID!): Friend 
+    get_recipe(id: ID!): Recipe
+    get_restaurant(id: ID!): Restaurant
+    get_friendOfFriend(friend_id: ID!): FriendOfFriend ## get single friend of your friend
+    get_review(id: String!): Review ## get single review of a recipe
+    all_freinds: [Friend] 
+    all_recipes(restaurant_Id: ID!): [Recipe]! ## all recipes of your specific restaurant
+    all_reviews(recipe_id: ID!): [Review]! ## all reviews your specific recipes
+    all_restaurants: [Restaurant] ## all restaurant
+    all_friendOfFreind(friend_id: ID!): [FriendOfFriend]! ## list of your friend-of-friends
 }
 
 type Mutation {
-    add_User(new_user: NewUserInput): User[]
-    add_Friend(new_friend: NewFriendInput): Friend[]
-    add_Restaurant(new_restaurant: NewRestaurantInput): Restaurant[]
+    add_user(new_user: NewUserInput!): User! ## signin/signup
+    add_friend(new_friend: NewFriendInput!): Friend! ##  follow a friend
+    add_restaurant(new_restaurant: NewRestaurantInput!): [Restaurant]! ## add restaurant
+    create_review(review: ReviewInput!): [Review]! ## give review on specific recipe
+    create_recipe(recipe: RecipeInput!): [Recipe]! ## make a new recipe in your specific restaurant
 }
 
