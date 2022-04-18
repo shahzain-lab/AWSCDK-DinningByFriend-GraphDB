@@ -1,14 +1,18 @@
-
+enum Thumb {
+    UP
+    Down
+}
 
 type TReply {
     replies_Id: ID!
     text: String!
+    thumb: Thumb!
 }
 
 type TReview {
     reviews_Id: ID!
     review: String!
-    replies: [Reply]
+    replies: [TReply]
     like_Count: Float!
     dislike_Count: Float!
 }
@@ -22,14 +26,14 @@ type TRecipeDetail {
 type TRecipe { 
     recipe_ID: String!
     recipe_Name: String!
-    recipe_details: RecipeDetail
-    reviews: [Review]!
+    recipe_details: TRecipeDetail
+    reviews: [TReview]!
 }
 
 type TRestaurant {
     restaurant_Id: String!
     restaurant_Name: String!
-    recipes: [Recipe]!
+    recipes: [TRecipe]!
 }
 
 type TFriendOfFriend {
@@ -40,20 +44,20 @@ type TFriendOfFriend {
 type TFriend {
     id: ID!
     friend_Name: String!
-    friends: [FriendOfFriend]!
+    friends: [TFriendOfFriend]!
 }
 
 type TUser {
     user_Id: ID!
     user_Name: String!
     user_email: String!
-    restaurants: [Restaurant]!
-    friends: [Friend]!
+    restaurants: [TRestaurant]!
+    friends: [TFriend]!
 }
 
 type TRecommendation {
-    friends: [Friend]!
-    restaurants: [Restaurant]!
+    friends: [TFriend]!
+    restaurants: [TRestaurant]!
 }
 
 input NewFriendInput { 
@@ -75,6 +79,7 @@ input NewRestaurantInput {
 input ReplyInput {
     replies_Id: ID!
     text: String
+    thumb: Thumb!
 }
 
 input ReviewInput {
@@ -85,7 +90,7 @@ input ReviewInput {
 input RecipeInput {
     recipe_ID: String!
     recipe_Name: String!
-    recipe_details: RecipeDetail
+    recipe_details: TRecipeDetail
 }
 
 type Query {
