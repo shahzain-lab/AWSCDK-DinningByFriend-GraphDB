@@ -1,16 +1,11 @@
 
-enum Thumb {
-    UP
-    DOWN
-}
 
-type Reply {
+type TReply {
     replies_Id: ID!
     text: String!
-    thumb: Thumb!
 }
 
-type Review {
+type TReview {
     reviews_Id: ID!
     review: String!
     replies: [Reply]
@@ -18,37 +13,37 @@ type Review {
     dislike_Count: Float!
 }
 
-type RecipeDetail {
+type TRecipeDetail {
     description: String
     ingrediants: String!
     tags: String!
 }
 
-type Recipe { 
+type TRecipe { 
     recipe_ID: String!
     recipe_Name: String!
     recipe_details: RecipeDetail
     reviews: [Review]!
 }
 
-type Restaurant {
+type TRestaurant {
     restaurant_Id: String!
     restaurant_Name: String!
     recipes: [Recipe]!
 }
 
-type FriendOfFriend {
+type TFriendOfFriend {
     friend_id: ID!,
     friend_Name: String!
 }
 
-type Friend {
+type TFriend {
     id: ID!
     friend_Name: String!
     friends: [FriendOfFriend]!
 }
 
-type User {
+type TUser {
     user_Id: ID!
     user_Name: String!
     user_email: String!
@@ -56,7 +51,7 @@ type User {
     friends: [Friend]!
 }
 
-type Recommendation {
+type TRecommendation {
     friends: [Friend]!
     restaurants: [Restaurant]!
 }
@@ -80,7 +75,6 @@ input NewRestaurantInput {
 input ReplyInput {
     replies_Id: ID!
     text: String
-    thumb: Thumb
 }
 
 input ReviewInput {
@@ -95,25 +89,25 @@ input RecipeInput {
 }
 
 type Query {
-    recommendations: Recommendation ## get recommended friends and their retaurants after signup
-    get_user: User ## get user info
-    get_friend(id: ID!): Friend 
-    get_recipe(id: ID!): Recipe
-    get_restaurant(id: ID!): Restaurant
-    get_friendOfFriend(friend_id: ID!): FriendOfFriend ## get single friend of your friend
-    get_review(id: String!): Review ## get single review of a recipe
-    all_freinds: [Friend] 
-    all_recipes(restaurant_Id: ID!): [Recipe]! ## all recipes of your specific restaurant
-    all_reviews(recipe_id: ID!): [Review]! ## all reviews your specific recipes
-    all_restaurants: [Restaurant] ## all restaurant
-    all_friendOfFreind(friend_id: ID!): [FriendOfFriend]! ## list of your friend-of-friends
+    recommendations: TRecommendation ## get recommended friends and their retaurants after signup
+    get_user: TUser ## get user info
+    get_friend(id: ID!): TFriend 
+    get_recipe(id: ID!): TRecipe
+    get_restaurant(id: ID!): TRestaurant
+    get_friendOfFriend(friend_id: ID!): TFriendOfFriend ## get single friend of your friend
+    get_review(id: String!): TReview ## get single review of a recipe
+    all_freinds: [TFriend] 
+    all_recipes(restaurant_Id: ID!): [TRecipe]! ## all recipes of your specific restaurant
+    all_reviews(recipe_id: ID!): [TReview]! ## all reviews your specific recipes
+    all_restaurants: [TRestaurant] ## all restaurant
+    all_friendOfFreind(friend_id: ID!): [TFriendOfFriend]! ## list of your friend-of-friends
 }
 
 type Mutation {
-    add_user(new_user: NewUserInput!): User! ## signin/signup
-    add_friend(new_friend: NewFriendInput!): Friend! ##  follow a friend
-    add_restaurant(new_restaurant: NewRestaurantInput!): [Restaurant]! ## add restaurant
-    create_review(review: ReviewInput!): [Review]! ## give review on specific recipe
-    create_recipe(recipe: RecipeInput!): [Recipe]! ## make a new recipe in your specific restaurant
+    add_user(new_user: NewUserInput!): TUser! ## signin/signup
+    add_friend(new_friend: NewFriendInput!): TFriend! ##  follow a friend
+    add_restaurant(new_restaurant: NewRestaurantInput!): [TRestaurant]! ## add restaurant
+    create_review(review: ReviewInput!): [TReview]! ## give review on specific recipe
+    create_recipe(recipe: RecipeInput!): [TRecipe]! ## make a new recipe in your specific restaurant
 }
 
