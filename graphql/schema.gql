@@ -90,7 +90,6 @@ input ReviewInput {
 input RecipeInput {
     recipe_ID: String!
     recipe_Name: String!
-    recipe_details: TRecipeDetail
 }
 
 type Query {
