@@ -7,7 +7,7 @@ export class dinningByFriendMainStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-     //////////////////////// creating User Pool /////////////////////////////////
+     // creating User Pool //
      const userPool = new cognito.UserPool(this, `${this.stackName}_USER_POOL`, {
       selfSignUpEnabled: true,
       accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
@@ -16,8 +16,7 @@ export class dinningByFriendMainStack extends cdk.Stack {
       },
       autoVerify: { email: true, },
       standardAttributes: {
-        email: { required: true, mutable: true, },
-        // phoneNumber: { required: true, mutable: true }
+        email: { required: true },
       },
     })
     const userPoolClient = new cognito.UserPoolClient(this, `${this.stackName}_USER_POOL_CLIENT`, {
@@ -34,6 +33,19 @@ export class dinningByFriendMainStack extends cdk.Stack {
             authorizationType: appsync.AuthorizationType.USER_POOL,
           },
         },
+    })
+
+    //  printing info //
+    new cdk.CfnOutput(this, 'graphql api', {
+      value: restaurantGraphApi.graphqlUrl
+    })
+
+    new cdk.CfnOutput(this, 'USERPOOLCLIENTID', {
+      value: userPoolClient.userPoolClientId
+    })
+
+    new cdk.CfnOutput(this, 'USERPOOLID', {
+      value: userPool.userPoolId
     })
   }
 }
