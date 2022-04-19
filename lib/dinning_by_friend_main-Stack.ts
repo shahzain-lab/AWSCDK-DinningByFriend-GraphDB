@@ -30,9 +30,6 @@ export class dinningByFriendMainStack extends cdk.Stack {
       schema: appsync.Schema.fromAsset('graphql/schema.gql'),
          authorizationConfig: {
           defaultAuthorization: {
-           apiKeyConfig: {
-               expires: cdk.Expiration.after(cdk.Duration.days(365))
-             },
             userPoolConfig: { userPool },
             authorizationType: appsync.AuthorizationType.USER_POOL,
           },
