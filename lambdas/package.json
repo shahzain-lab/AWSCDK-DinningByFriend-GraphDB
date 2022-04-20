@@ -1,0 +1,20 @@
+{
+  "name": "lambdas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.3",
+    "gremlin": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/async": "^3.2.12",
+    "@types/gremlin": "^3.5.2"
+  }
+}
