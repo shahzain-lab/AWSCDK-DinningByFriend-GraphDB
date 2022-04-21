@@ -161,7 +161,7 @@ export const handler = async (event: any, context: Context, callback: Callback):
 
         }
 
-    } catch (e) {
+    } catch (e:any) {
         console.log("Error ==>", e);
         callback(e, null);
     }

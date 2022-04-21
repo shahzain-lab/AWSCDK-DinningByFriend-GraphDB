@@ -49,7 +49,6 @@ export const handler = async (event: any, __: Context, callback: Callback) => {
                         .addE(relationships[1].name as "Serves")
                         .from_('restaurant').to('cuisine')
                         .select("cuisine", "restaurant")
-                        .by(__.elementMap()).by(__.elementMap())
                         .next()
                     console.log("Result", JSON.stringify(result, null, 2))
                     const v = result.value as {
@@ -81,7 +80,6 @@ export const handler = async (event: any, __: Context, callback: Callback) => {
                         .addE(relationships[4].name as "Are About")
                         .from_(_review).to(_restaurant)
                         .select(_person, _review, _restaurant)
-                        .by(__.elementMap()).by(__.elementMap()).by(__.elementMap())
                         .next()
                     console.log("Result", result)
                     const v = result.value as {
@@ -112,7 +110,6 @@ export const handler = async (event: any, __: Context, callback: Callback) => {
                         .from_(_person).to(_review)
                         .property("thumb", thumb).property("datetime", new Date().getTime()).as(_rate)
                         .select(_person, _review, _rate)
-                        .by(__.elementMap()).by(__.elementMap()).by(__.elementMap())
                         .next()
                     console.log("Result", JSON.stringify(result, null, 2))
                     const v = result.value as {
@@ -147,8 +144,7 @@ export const handler = async (event: any, __: Context, callback: Callback) => {
                         .V(friend_Id).as(_friend).as(_friendsOfFriend)
                         .addE(relationships[0].name as "Friends").from_(_person).to(_friend)
                         .addE(relationships[0].name as "Friends").from_(_friend).to(_person)
-                        .select(_friend, _friendsOfFriend).by(__.elementMap())
-                        .by(__.out(relationships[0].name as "Friends").elementMap().fold()).next()
+                        .select(_friend, _friendsOfFriend).next()
 
                     console.log("Result", JSON.stringify(result, null, 2))
                     const v = result.value as {
@@ -169,7 +165,7 @@ export const handler = async (event: any, __: Context, callback: Callback) => {
 
         }
 
-    } catch (e) {
+    } catch (e:any) {
         console.log("Error ==>", e);
         callback(e, null)
 

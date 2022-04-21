@@ -144,5 +144,118 @@
             "bucketId": "44048420-8014-11eb-8068-ddb60bb92a61",
             "additionalProperties": false
         }
+    ],
+    "relationships": [
+        {
+            "name": "Friends",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "childCardinality": "1",
+            "level": "entity",
+            "GUID": "d29a3750-8016-11eb-8068-ddb60bb92a61",
+            "lineSize": 2,
+            "bucketId": "44048420-8014-11eb-8068-ddb60bb92a61",
+            "parentCollection": "7e8579b0-8014-11eb-8068-ddb60bb92a61",
+            "childCollection": "7e8579b0-8014-11eb-8068-ddb60bb92a61",
+            "properties": [
+                {
+                    "primaryKey": false,
+                    "type": "string",
+                    "name": "New property",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "propCardinality": "single",
+                    "GUID": "0ae931b0-8017-11eb-8068-ddb60bb92a61"
+                }
+            ]
+        },
+        {
+            "name": "Serves",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "childCardinality": "1",
+            "level": "entity",
+            "GUID": "b267a740-8018-11eb-8068-ddb60bb92a61",
+            "lineSize": 2,
+            "bucketId": "44048420-8014-11eb-8068-ddb60bb92a61",
+            "parentCollection": "07a4aa80-8016-11eb-8068-ddb60bb92a61",
+            "childCollection": "2efde880-8016-11eb-8068-ddb60bb92a61",
+            "properties": []
+        },
+        {
+            "name": "Writes",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "childCardinality": "1",
+            "level": "entity",
+            "GUID": "bf61a4f0-8018-11eb-8068-ddb60bb92a61",
+            "lineSize": 2,
+            "bucketId": "44048420-8014-11eb-8068-ddb60bb92a61",
+            "parentCollection": "7e8579b0-8014-11eb-8068-ddb60bb92a61",
+            "childCollection": "39d6daf0-8016-11eb-8068-ddb60bb92a61",
+            "properties": []
+        },
+        {
+            "name": "Rates",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "childCardinality": "1",
+            "level": "entity",
+            "GUID": "c9159f60-8018-11eb-8068-ddb60bb92a61",
+            "lineSize": 2,
+            "bucketId": "44048420-8014-11eb-8068-ddb60bb92a61",
+            "parentCollection": "7e8579b0-8014-11eb-8068-ddb60bb92a61",
+            "childCollection": "39d6daf0-8016-11eb-8068-ddb60bb92a61",
+            "properties": [
+                {
+                    "primaryKey": false,
+                    "type": "string",
+                    "name": "thumb",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "propCardinality": "single",
+                    "GUID": "2183a300-8031-11eb-a8cb-8f5c42934f3e",
+                    "enum": [
+                        "UP",
+                        "DOWN"
+                    ],
+                    "required": true
+                },
+                {
+                    "primaryKey": false,
+                    "childType": "timestamp",
+                    "type": "number",
+                    "name": "datetime",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "propCardinality": "single",
+                    "GUID": "ec2e9690-8113-11eb-a8cb-8f5c42934f3e",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name": "Are About",
+            "relationshipType": "",
+            "parentField": [],
+            "parentCardinality": "1",
+            "childField": [],
+            "childCardinality": "1",
+            "level": "entity",
+            "GUID": "32ac6a30-8019-11eb-8068-ddb60bb92a61",
+            "lineSize": 2,
+            "bucketId": "44048420-8014-11eb-8068-ddb60bb92a61",
+            "parentCollection": "39d6daf0-8016-11eb-8068-ddb60bb92a61",
+            "childCollection": "07a4aa80-8016-11eb-8068-ddb60bb92a61",
+            "properties": []
+        }
     ]
 }
