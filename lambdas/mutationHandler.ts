@@ -1,12 +1,11 @@
 import { Callback, Context } from 'aws-lambda';
-import { NewAppSyncResolverEvent } from './typeDefs';
 import { g, gremlinQueryHandler, __, P } from './gremlinSocketHandler';
 import { collections, relationships } from './dbSchema.json';
 
 
 
 ////////////////////////// Handler //////////////////////////
-export const handler = async (event: NewAppSyncResolverEvent<any>, context: Context, callback: Callback) => {
+export const handler = async (event: any, __: Context, callback: Callback) => {
     console.log("EVENT==>", event);
     const EVENT_ACTION = event.info.fieldName;
     const USER_ID = event.identity.sub;
@@ -15,7 +14,7 @@ export const handler = async (event: NewAppSyncResolverEvent<any>, context: Cont
 
         switch (EVENT_ACTION) {
 
-            case "add_person":
+            case "add_user":
                 callback(null, {
                     id: "123",
                     name: "EXAMPLE",
@@ -43,7 +42,7 @@ export const handler = async (event: NewAppSyncResolverEvent<any>, context: Cont
                 break;
 
 
-            case "add_cuisine":
+            case "create_recipe":
                 return gremlinQueryHandler(async () => {
                     const { name, restaurantId } = event.arguments.input;
                     // console.log('{ "units" : {{units}} }'.replace("{{units}}", `${location.units}`))
@@ -72,7 +71,7 @@ export const handler = async (event: NewAppSyncResolverEvent<any>, context: Cont
                 break;
 
 
-            case "write_review_for_restaurant":
+            case "create_review":
                 return gremlinQueryHandler(async () => {
                     const _person = "person"; const _review = "review"; const _restaurant = "restaurant";
                     const { restaurantId, text } = event.arguments.input;
@@ -135,7 +134,7 @@ export const handler = async (event: NewAppSyncResolverEvent<any>, context: Cont
                 })
                 break;
 
-            case "add_Friend":
+            case "add_friend":
                 return gremlinQueryHandler(async () => {
                     const { friend_Id } = event.arguments;
                     const _person = "person"; const _friend = "friend"; const _friendsOfFriend = "friendsOfFriend";
