@@ -27,16 +27,13 @@ export const handler = async (event: any, __: Context, callback: Callback) => {
             case "add_restaurant":
                 return gremlinQueryHandler(async () => {
                     const { name } = event.arguments.input;
-                    // console.log('{ "units" : {{units}} }'.replace("{{units}}", `${location.units}`))
                     const result = await g.addV(collections[1].collectionName as "Restaurant")
                         .property("name", name)
                         .elementMap().next()
                     console.log("Result", result)
                     const value = result.value as { id: string, label: string, name: string }
-                    /* aspect in value
-                          {id:string, label: string, name:string, location: '{\"units\":\"number\"}'}
-                         */
-                    const restaurant = { id: value.id, name: value.name, serves: [], reviews: [] }
+                   
+                    const restaurant = { id: value.id, name: value.name, reviews: [] }
                     return restaurant;
                 })
                 break;
